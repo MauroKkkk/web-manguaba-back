@@ -36,7 +36,7 @@ function DeleteDados(req, resp) {
 };
 
 function Index(req, resp) {
-    resp.sendFile(__dirname+"/views/index.ejs");
+    resp.render(__dirname+"/views/index.ejs");
 };
 
 server.get("/", Index);
