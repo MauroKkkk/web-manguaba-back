@@ -36,7 +36,7 @@ function DeleteDados(req, resp) {
 };
 
 function Index(req, resp) {
-    resp.render("index");
+    resp.render("pages/index");
 };
 
 server.get("/", Index);
