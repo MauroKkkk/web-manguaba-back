@@ -4,7 +4,7 @@ const { response } = require('express');
 var server = express();
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
-server.use('/', express.static('Arquivos'));
+server.use('/', express.static(__dirname+'/Arquivos'));
 server.set("view engine", "ejs");
 var dados = [];
 var info;

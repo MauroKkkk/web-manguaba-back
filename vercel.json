@@ -1,6 +1,5 @@
 {
     "version": 2,
-    "rewritres": [{ "source": "/(.*)", "destination": "/"}],
     "builds": [
         {
             "src": "server.js",
