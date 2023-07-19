@@ -6,7 +6,7 @@ server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 server.use('/', express.static('Arquivos'));
 server.set("view engine", "ejs");
-var dados = 0;
+var dados = [];
 var info;
 
 function GetDados(req, resp) {
@@ -15,9 +15,18 @@ function GetDados(req, resp) {
 };
 
 function PostDados(req, resp) {
-    info = req.query.Dado
-    dados = info;
+
+    info = { "Distancia": req.query.distancia, "Time": new Date() }
+    if(info.Distancia == "0.00"){
+        console.log("Não enviou");
+    }   else {
+        dados.push(info);
+        console.log(info);
+    }
+    dados.push(info);
+    console.log(info);
     resp.send({ "Status": 200 });
+
     console.log(info);
 };
 
