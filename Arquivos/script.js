@@ -19,7 +19,7 @@ function GetDados() {
         };
     };
     try {
-        requests.open("GET", "http://127.0.0.1/Receber");
+        requests.open("GET", "https://web-manguaba-back.vercel.app/receber");
         requests.send();
     } catch (e) {
         console.log(e);
