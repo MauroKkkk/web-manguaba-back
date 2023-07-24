@@ -16,9 +16,10 @@ function GetDados(req, resp) {
 
 function PostDados(req, resp) {
 
-    info = { "Distancia": req.query.distancia, "Time": new Date() }
+    info = { "Distancia": req.query.distancia, "Time": new Date().toLocaleTimeString() }
     if(info.Distancia == "0.00"){
         console.log("Não enviou");
+
     }   else {
         dados.push(info);
         console.log(info);
