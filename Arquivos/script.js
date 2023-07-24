@@ -35,8 +35,9 @@ function Grafico() {
         y: distancias,
         type: 'lines'
     };
+    var layout = { width: 600, height: 400 };
     var data = [linha];
-    Plotly.newPlot('Grafico', data);
+    Plotly.newPlot('Grafico', data, layout);
 }
 
 function Indicador() {
