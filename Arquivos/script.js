@@ -1,18 +1,21 @@
-var temperaturas, time, dados;
-var max = 0;
+var distancias, time, dados;
+var max = 10;
 var min = 0;
-var temp = 0;
+var dist = 0;
 function GetDados() {
-    temperaturas = [];
+    distancias = [];
     time = [];
     var requests = new XMLHttpRequest();
     requests.onreadystatechange = function() {
         if (requests.readyState == 4) {
             dados = JSON.parse(requests.responseText);
             for (i = 0; i < dados.length; i++) {
-                temp = parseFloat(dados[i].Distancia);
-                temperaturas.push(temp);
+                var dist1 = parseFloat(dados[i].Distancia);
+                dist = (180 - dist1) / 100
+                distancias.push(dist);
                 time.push(dados[i].Time);
+
+
             };
             Grafico();
             Indicador();
@@ -29,7 +32,7 @@ function GetDados() {
 function Grafico() {
     var linha = {
         x: time,
-        y: temperaturas,
+        y: distancias,
         type: 'lines'
     };
     var data = [linha];
@@ -39,8 +42,8 @@ function Grafico() {
 function Indicador() {
     var data = [{
         domain: { x: [0, 1], y: [0, 1] },
-        value: temp,
-        title: { text: "Distancia" },
+        value: dist,
+        title: { text: "Nível da água em metros:" },
         type: "indicator",
         mode: "gauge+number",
         delta: { reference: 400.50 },
