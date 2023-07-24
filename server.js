@@ -16,7 +16,7 @@ function GetDados(req, resp) {
 
 function PostDados(req, resp) {
 
-    info = { "Distancia": req.query.distancia, "Time": new Date().toLocaleString("pt-BR", {timeZone: "America/Maceio"}) }
+    info = { "Distancia": req.query.distancia, "Time": new Date().toTimeString("pt-BR", {timeZone: "America/Maceio"}) }
     if(info.Distancia == "0.00"){
         console.log("Não enviou");
 
