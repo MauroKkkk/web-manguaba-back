@@ -16,7 +16,7 @@ function GetDados() {
     requests.onreadystatechange = function() {
         if (requests.readyState == 4) {
             dados = JSON.parse(requests.responseText);
-            while (dados.length>=16){
+            while (dados.length>=10){
                 dados.shift();
             }
             for (i = 0; i < dados.length; i++) {
