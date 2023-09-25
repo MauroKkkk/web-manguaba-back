@@ -6,21 +6,33 @@ function GetDados() {
     distancias = [];
     time = [];
     var requests = new XMLHttpRequest();
+    var novosDadosContagem = 0; // Contagem de novos dados
+
     requests.onreadystatechange = function() {
         if (requests.readyState == 4) {
             dados = JSON.parse(requests.responseText);
+            
             for (i = 0; i < dados.length; i++) {
                 var dist1 = parseFloat(dados[i].Distancia);
                 dist = (180 - dist1) / 100
                 distancias.push(dist);
                 time.push(dados[i].Time);
 
+                novosDadosContagem++;
 
+                if (novosDadosContagem === 10) {
+                    // Remover o primeiro dado a cada 10 novos dados
+                    distancias.shift();
+                    time.shift();
+                    novosDadosContagem = 0; // Resetar a contagem
+                }
             };
+
             Grafico();
             Indicador();
         };
     };
+
     try {
         requests.open("GET", "https://web-manguaba-back.vercel.app/receber");
         requests.send();
@@ -35,9 +47,8 @@ function Grafico() {
         y: distancias,
         type: 'lines'
     };
-    var layout = { width: 600, height: 400 };
     var data = [linha];
-    Plotly.newPlot('Grafico', data, layout);
+    Plotly.newPlot('Grafico', data);
 }
 
 function Indicador() {
