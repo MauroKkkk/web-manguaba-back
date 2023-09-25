@@ -45,7 +45,7 @@ function GetDados() {
 function Grafico() {
     if (novosDadosContagem1 == 8) {
         // Remover o primeiro dado a cada 10 novos dados
-        Plotly.deleteTraces("Graficos", 0);
+        data.shift();
         console.log(novosDadosContagem1)
         novosDadosContagem1 = 0; // Resetar a contagem
     }
