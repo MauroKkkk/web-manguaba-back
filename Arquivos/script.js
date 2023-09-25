@@ -43,7 +43,7 @@ function Grafico() {
     if (novosDadosContagem == 10) {
         // Remover o primeiro dado a cada 10 novos dados
         data.shift();
-        Plotly.deleteTraces(data, 0);
+        Plotly.deleteTraces("Grafico", 0);
         novosDadosContagem = 0; // Resetar a contagem
     }
     Plotly.newPlot('Grafico', data);
