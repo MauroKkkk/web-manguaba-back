@@ -2,11 +2,12 @@ var distancias, time, dados;
 var max = 10;
 var min = 0;
 var dist = 0;
+var novosDadosContagem = 0;
 function GetDados() {
     distancias = [];
     time = [];
     var requests = new XMLHttpRequest();
-    var novosDadosContagem = 0; // Contagem de novos dados
+     // Contagem de novos dados
 
     requests.onreadystatechange = function() {
         if (requests.readyState == 4) {
@@ -17,15 +18,6 @@ function GetDados() {
                 dist = (180 - dist1) / 100
                 distancias.push(dist);
                 time.push(dados[i].Time);
-
-                novosDadosContagem++;
-
-                if (novosDadosContagem === 10) {
-                    // Remover o primeiro dado a cada 10 novos dados
-                    distancias.shift();
-                    time.shift();
-                    novosDadosContagem = 0; // Resetar a contagem
-                }
             };
 
             Grafico();
@@ -49,6 +41,14 @@ function Grafico() {
     };
     var data = [linha];
     Plotly.newPlot('Grafico', data);
+    
+    novosDadosContagem++;
+
+    if (novosDadosContagem === 10) {
+        // Remover o primeiro dado a cada 10 novos dados
+        data.shift();
+        novosDadosContagem = 0; // Resetar a contagem
+    }
 }
 
 function Indicador() {
