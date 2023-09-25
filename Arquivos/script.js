@@ -20,7 +20,7 @@ function GetDados() {
                 distancias.push(dist);
                 time.push(dados[i].Time);
             };
-            if (novosDadosContagem == 10) {
+            if (novosDadosContagem == 8) {
                 // Remover o primeiro dado a cada 10 novos dados
                 time.shift();
                 distancias.shift();
@@ -43,7 +43,7 @@ function GetDados() {
 }
 
 function Grafico() {
-    if (novosDadosContagem1 == 10) {
+    if (novosDadosContagem1 == 8) {
         // Remover o primeiro dado a cada 10 novos dados
         Plotly.deleteTraces("Graficos", 0);
         console.log(novosDadosContagem1)
