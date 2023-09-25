@@ -40,15 +40,16 @@ function Grafico() {
         type: 'lines'
     };
     var data = [linha];
-    Plotly.newPlot('Grafico', data);
-    
-    novosDadosContagem++;
-
-    if (novosDadosContagem === 10) {
+    if (novosDadosContagem == 10) {
         // Remover o primeiro dado a cada 10 novos dados
         data.shift();
         novosDadosContagem = 0; // Resetar a contagem
     }
+    Plotly.newPlot('Grafico', data);
+    
+    novosDadosContagem++;
+
+
 }
 
 function Indicador() {
