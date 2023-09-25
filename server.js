@@ -21,7 +21,12 @@ function PostDados(req, resp) {
         console.log("Não enviou");
 
     }   else {
+
         dados.push(info);
+        if(dados.length>=8){
+            dados.shift()
+            console.log(dados)
+        }
         console.log(info);
     }
     dados.push(info);

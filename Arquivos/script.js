@@ -4,9 +4,9 @@ var min = 0;
 var dist = 0;
 var novosDadosContagem = 0;
 var novosDadosContagem1 = 0;
-var data = [];
-var distancias = [];
-var time = [];
+var data = 0;
+var distancias = 0;
+var time = 0
 function GetDados() {
     distancias = [];
     time = [];
@@ -16,12 +16,15 @@ function GetDados() {
     requests.onreadystatechange = function() {
         if (requests.readyState == 4) {
             dados = JSON.parse(requests.responseText);
-            
+            while (dados.length>=16){
+                dados.shift();
+            }
             for (i = 0; i < dados.length; i++) {
                 var dist1 = parseFloat(dados[i].Distancia);
                 dist = (180 - dist1) / 100
                 distancias.push(dist);
                 time.push(dados[i].Time);
+
             };
 
             Grafico();
@@ -39,25 +42,16 @@ function GetDados() {
 
 function Grafico() {
     
-    var linha = {
+    linha = {
         x: time,
         y: distancias,
         type: 'lines'
     };
+
     data = [linha]
     console.log(linha)
 
-
     Plotly.newPlot("Graficos", data);
-    
-    novosDadosContagem1++;
-    if (novosDadosContagem1 == 8) {
-        // Remover o primeiro dado a cada 10 novos dados
-        time.shift();
-        distancias.shift();
-        novosDadosContagem1 = 0; // Resetar a contagem
-    }
-
 }
 
 function Indicador() {
@@ -76,4 +70,4 @@ function Indicador() {
 }
 
 
-setInterval(GetDados, 1000);
+setInterval(GetDados, 3000);
