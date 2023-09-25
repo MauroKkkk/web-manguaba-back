@@ -43,12 +43,7 @@ function GetDados() {
 }
 
 function Grafico() {
-    if (novosDadosContagem1 == 8) {
-        // Remover o primeiro dado a cada 10 novos dados
-        data.shift();
-        console.log(novosDadosContagem1)
-        novosDadosContagem1 = 0; // Resetar a contagem
-    }
+
     var linha = {
         x: time,
         y: distancias,
@@ -59,7 +54,12 @@ function Grafico() {
     Plotly.newPlot("Graficos", data);
     
     novosDadosContagem1++;
-
+    if (novosDadosContagem1 == 8) {
+        // Remover o primeiro dado a cada 10 novos dados
+        data.shift();
+        console.log(novosDadosContagem1)
+        novosDadosContagem1 = 0; // Resetar a contagem
+    }
 
 }
 
