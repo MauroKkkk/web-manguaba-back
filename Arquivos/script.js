@@ -4,6 +4,9 @@ var min = 0;
 var dist = 0;
 var novosDadosContagem = 0;
 var novosDadosContagem1 = 0;
+var data = [];
+var distancias = [];
+var time = [];
 function GetDados() {
     distancias = [];
     time = [];
@@ -20,14 +23,6 @@ function GetDados() {
                 distancias.push(dist);
                 time.push(dados[i].Time);
             };
-            if (novosDadosContagem == 8) {
-                // Remover o primeiro dado a cada 10 novos dados
-                time.shift();
-                distancias.shift();
-                console.log(novosDadosContagem)
-                novosDadosContagem = 0; // Resetar a contagem
-            }
-            novosDadosContagem++;
 
             Grafico();
             Indicador();
@@ -43,21 +38,23 @@ function GetDados() {
 }
 
 function Grafico() {
-
+    
     var linha = {
         x: time,
         y: distancias,
         type: 'lines'
     };
-    var data = [linha];
+    data = [linha]
+    console.log(linha)
+
 
     Plotly.newPlot("Graficos", data);
     
     novosDadosContagem1++;
     if (novosDadosContagem1 == 8) {
         // Remover o primeiro dado a cada 10 novos dados
-        data.shift();
-        console.log(novosDadosContagem1)
+        time.shift();
+        distancias.shift();
         novosDadosContagem1 = 0; // Resetar a contagem
     }
 
