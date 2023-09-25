@@ -21,7 +21,8 @@ function GetDados() {
             }
             for (i = 0; i < dados.length; i++) {
                 var dist1 = parseFloat(dados[i].Distancia);
-                dist = (180 - dist1) / 100
+                console.log(dist1)
+                dist = (dist1 - 180) / 100
                 distancias.push(dist);
                 time.push(dados[i].Time);
 
@@ -70,4 +71,4 @@ function Indicador() {
 }
 
 
-setInterval(GetDados, 3000);
+setInterval(GetDados, 2000);
