@@ -1,4 +1,4 @@
-var distancias, time, dados;
+var distancias, time, dados, delta, somas;
 var max = 10;
 var min = 0;
 var dist = 0;
@@ -6,18 +6,22 @@ var novosDadosContagem = 0;
 var novosDadosContagem1 = 0;
 var data = 0;
 var distancias = 0;
-var time = 0
+var time = 0;
+var sum = 0;
+
 function GetDados() {
     distancias = [];
     time = [];
+    delta = [];
     var requests = new XMLHttpRequest();
      // Contagem de novos dados
 
     requests.onreadystatechange = function() {
         if (requests.readyState == 4) {
             dados = JSON.parse(requests.responseText);
-            while (dados.length>=8){
+            while (dados.length>=12){
                 dados.shift();
+                delta.shift();
             }
             for (i = 0; i < dados.length; i++) {
                 var dist1 = parseFloat(dados[i].Distancia);
@@ -25,9 +29,13 @@ function GetDados() {
                 dist = (dist1 - 180) / 100
                 distancias.push(dist);
                 time.push(dados[i].Time);
-
+                distancias.forEach(num => {
+                    sum += num;
+                    sum = sum / 12
+                    delta.push(sum);
+                });
             };
-
+            Variacao();
             Grafico();
             Indicador();
         };
@@ -42,7 +50,9 @@ function GetDados() {
 }
 
 function Grafico() {
-    
+    layout = {
+        title: "Nível da água em metros:"
+    }
     linha = {
         x: time,
         y: distancias,
@@ -50,11 +60,20 @@ function Grafico() {
     };
 
     data = [linha]
-    console.log(linha)
 
-    Plotly.newPlot("Graficos", data);
+    Plotly.newPlot("Graficos", data, layout);
 }
-
+function Variacao() {
+    layout = {title: "Variação"}
+    linhas = {
+        x: time,
+        y: delta,
+        type: 'lines'
+    };
+    datas = [linhas]
+    console.log(delta)
+    Plotly.newPlot("Variacao", datas, layout);
+}
 function Indicador() {
     var data = [{
         domain: { x: [0, 1], y: [0, 1] },
